@@ -1,0 +1,160 @@
+{
+    "name": "DefaultActions",
+    "maps": [
+        {
+            "name": "DefaultController",
+            "id": "56fc87e2-169c-4e9b-822e-7ab9fd0d753c",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "53e9561a-cd00-41ff-b2b3-fc355e1e65e9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "24bf43e8-bbd2-495c-b416-11471f3a4422",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LineUp",
+                    "type": "Button",
+                    "id": "f3e9ebe7-9d5a-44f0-aa3c-1b456103b349",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LineDown",
+                    "type": "Button",
+                    "id": "2c122267-0646-473e-adaa-5cb415557435",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "443b7acf-56bc-4c8e-9b33-b46d9f08c1b0",
+                    "path": "<HID::Padix Co. Ltd. USB,2-axis 10-button gamepad>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "WASD",
+                    "id": "0f92bc54-3187-4c77-b374-37f92f9d45ad",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6a341d4e-f505-4dff-bb6f-7e22bba44a61",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d6e8d246-a35e-4398-ac4b-d11025378065",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "4d2f6ce3-0c37-4e70-8063-48b7837c62e7",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5af804fd-b23c-47c0-8393-afe196ef84cd",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "40d062d7-48cd-47cc-bde1-056882ccac68",
+                    "path": "<HID::Padix Co. Ltd. USB,2-axis 10-button gamepad>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7acef05-26c6-4ba7-b029-bf6cb1fadb9c",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "547885b5-c40c-472d-8105-45432f824daa",
+                    "path": "<HID::Padix Co. Ltd. USB,2-axis 10-button gamepad>/button6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LineUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a4715fe-3d0f-46ad-b12c-16116a63d640",
+                    "path": "<HID::Padix Co. Ltd. USB,2-axis 10-button gamepad>/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LineDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
