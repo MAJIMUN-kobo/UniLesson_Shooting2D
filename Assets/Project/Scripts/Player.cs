@@ -23,43 +23,84 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public Rigidbody2D bulletRb;
 
-    void Start()
+    void OnEnable()
     {
-        // インプットアクションイベントの登録
-        moveInput.action.performed += MoveInputActionPerformed;
-        moveInput.action.canceled += MoveInputActionCanceled;
-        fireInput.action.performed += FireInputActionPerformed;
-        fireInput.action.canceled += FireInputActionCanceled;
-        moveInput.action.Enable();
-        fireInput.action.Enable();
+        RegisterInputActions();
     }
 
+    void OnDisable()
+    {
+        
+    }
+
+
+    void Start()
+    {
+    }
+
+
     /// <summary>
-    /// インプットアクションイベント：移動
+    /// アクションイベント：移動
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="context">アクションコールバック</param>
     private void MoveInputActionPerformed(InputAction.CallbackContext context)
     {
         _moveInputValue = context.ReadValue<Vector2>();
     }
 
     /// <summary>
-    /// インプットアクションイベント：移動キャンセル
+    /// アクションイベント：移動のキャンセル
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="context">アクションコールバック</param>
     private void MoveInputActionCanceled(InputAction.CallbackContext context)
     {
         _moveInputValue = Vector2.zero;
     }
 
+    /// <summary>
+    /// アクションイベント：射撃
+    /// </summary>
+    /// <param name="context">アクションコールバック</param>
     private void FireInputActionPerformed(InputAction.CallbackContext context)
     {
         _fireInputValue = context.ReadValue<float>();
     }
 
+    /// <summary>
+    /// アクションイベント：射撃のキャンセル
+    /// </summary>
+    /// <param name="context">アクションコールバック</param>
     private void FireInputActionCanceled(InputAction.CallbackContext context)
     {
         _fireInputValue = 0f;
+    }
+
+    /// <summary>
+    /// アクションイベントの登録
+    /// </summary>
+    private void RegisterInputActions()
+    {
+        moveInput.action.performed += MoveInputActionPerformed;
+        moveInput.action.canceled  += MoveInputActionCanceled;
+        fireInput.action.performed += FireInputActionPerformed;
+        fireInput.action.canceled  += FireInputActionCanceled;
+
+        moveInput.action.Enable();
+        fireInput.action.Enable();
+    }
+
+    /// <summary>
+    /// アクションイベントの解放
+    /// </summary>
+    private void ReleaseInputActions()
+    {
+        moveInput.action.performed -= MoveInputActionPerformed;
+        moveInput.action.canceled  -= MoveInputActionCanceled;
+        fireInput.action.performed -= FireInputActionPerformed;
+        fireInput.action.canceled  -= FireInputActionCanceled;
+
+        moveInput.action.Disable();
+        fireInput.action.Disable();
     }
 
     void Update()
@@ -76,17 +117,30 @@ public class Player : MonoBehaviour
             {
                 for (int i = 0; i < shotLine; i++)
                 {
-                    GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(i - 0.5f, 0, 0), Quaternion.identity);
-                    bulletRb = bullet.GetComponent<Rigidbody2D>();
-                    Destroy(bullet, 1f);    // n秒後に弾を消す
+                    Vector3 shotPosition = transform.position + new Vector3(i - 0.5f, 0, 0);
+                    Quaternion shotRotation = Quaternion.identity;
+                    Vector3 shotForce = new Vector3(0, 1) * shotPower;
 
-                    // AddFoce（ 飛ばす方向と力, 飛ばすときのモード変更 ）
-                    bulletRb.AddForce(new Vector2(0, 1) * shotPower, ForceMode2D.Impulse);
-
-                    // 発射間隔タイマーリセット
-                    _shotIntervalTimer = 0f;
+                    Shot(bulletPrefab, shotPosition, shotRotation, shotForce, 1f);
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 弾丸の発射
+    /// </summary>
+    /// <param name="original">弾丸のプレハブ</param>
+    /// <param name="position">発射座標</param>
+    /// <param name="rotation">発射角度</param>
+    /// <param name="direction">進行方向</param>
+    /// <param name="lifeTime">生存時間</param>
+    private void Shot(GameObject original, Vector3 position, Quaternion rotation, Vector3 direction, float lifeTime)
+    {
+        GameObject clone = Instantiate(original, position, rotation);
+        BaseBullet bullet = clone.GetComponent<BaseBullet>();
+        bullet.Initialize(gameObject, shotPower, 1, lifeTime, direction, null);
+
+        Destroy(bullet, lifeTime);
     }
 }
